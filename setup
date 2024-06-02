@@ -1,0 +1,25 @@
+#!/bin/bash
+
+df_dir=~/dotfiles
+echo "dotfile dir: $df_dir"
+
+echo "Installing rustup..."
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+
+echo "Installing bob (nvim manager)..."
+cargo install bob-nvim
+bob
+
+echo "Installing nvim..."
+bob use stable
+
+
+echo "Install other programs..."
+sudo apt install ripgrep
+sudo apt install fd-find
+sudo apt install xclip
+
+echo set up nvim symlink:
+ln -s $df_dir/nvim ~/.config/nvim
+
+echo "source ${df_dir}/bash_aliases" >> ~/.bashrc
