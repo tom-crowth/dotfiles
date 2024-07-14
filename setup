@@ -45,3 +45,12 @@ echo "mamba activate dev" >> ~/.bashrc
 echo "source ${df_dir}/bash_aliases" >> ~/.bashrc
 
 source ~/.bashrc
+
+# setup git
+git config --global user.name tom-crowth
+git config --global user.email tom.crowth@gmail.com
+git config --global credential.helper store
+git config --global core.editor nvim
+# add github credentials from another computer
+
+echo 
