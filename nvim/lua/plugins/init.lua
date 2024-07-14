@@ -47,7 +47,11 @@ return {
         }
     },
 
-    { 'folke/which-key.nvim',  opts = {} },
+    {
+        'folke/which-key.nvim',
+        dependencies = { "echasnovski/mini.nvim" },
+        opts = {}
+    },
 
     {
         'navarasu/onedark.nvim',

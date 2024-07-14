@@ -1,25 +1,47 @@
 #!/bin/bash
 
+# get updates and upgrades
+sudo apt update
+sudo apt upgrade
+
+echo "Install useful programs..."
+sudo apt install build-essential
+sudo apt install npm # large install for only getting pyright LSP
+sudo apt install ripgrep
+sudo apt install fd-find
+sudo apt install xclip
+
 df_dir=~/dotfiles
 echo "dotfile dir: $df_dir"
 
 echo "Installing rustup..."
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 
+# add rust commands to current shell
+source ~/.bashrc
+
 echo "Installing bob (nvim manager)..."
 cargo install bob-nvim
 bob
 
 echo "Installing nvim..."
+echo "PATH=$PATH:~/.local/share/bob/nvim-bin/" >> ~/.bashrc
+source ~/.bashrc
 bob use stable
-
-
-echo "Install other programs..."
-sudo apt install ripgrep
-sudo apt install fd-find
-sudo apt install xclip
 
 echo set up nvim symlink:
 ln -s $df_dir/nvim ~/.config/nvim
 
+# set up python env using mamba
+curl -L -O "https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-$(uname)-$(uname -m).sh"
+bash Miniforge3-$(uname)-$(uname -m).sh
+rm Miniforge3-$(uname)-$(uname -m).sh
+mamba init
+source ~/.bashrc
+mamba create dev
+echo "mamba activate dev" >> ~/.bashrc
+
+# add aliases to ~/.bashrc
 echo "source ${df_dir}/bash_aliases" >> ~/.bashrc
+
+source ~/.bashrc
