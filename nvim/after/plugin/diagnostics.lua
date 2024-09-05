@@ -1,10 +1,10 @@
-vim.keymap.set("n", "<leader>db", "<cmd>Trouble<CR>", {buffer = 0})
+vim.keymap.set("n", "<leader>db", "<cmd>Trouble<CR>", { buffer = 0 })
 
 local function setup_lsp_diags()
     vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
         vim.lsp.diagnostic.on_publish_diagnostics,
         {
-            virtual_text = false,
+            virtual_text = true,
             signs = true,
             update_in_insert = true,
             underline = true,
@@ -13,4 +13,3 @@ local function setup_lsp_diags()
 end
 
 setup_lsp_diags()
-

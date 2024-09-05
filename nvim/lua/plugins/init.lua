@@ -18,6 +18,14 @@ return {
         },
     },
 
+    {
+        "lervag/vimtex",
+        lazy = false,
+        init = function()
+            vim.g.vimtext_viw_method = "zathura"
+        end
+    },
+
     "nvim-treesitter/playground",
     "mbbill/undotree",
     "tpope/vim-fugitive",
