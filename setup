@@ -10,6 +10,10 @@ sudo apt install npm # large install for only getting pyright LSP
 sudo apt install ripgrep
 sudo apt install fd-find
 sudo apt install xclip
+# for latex in vim:
+sudo apt install latxmk
+sudo apt install xdotool
+sudo apt install zathura
 
 df_dir=~/dotfiles
 echo "dotfile dir: $df_dir"
@@ -52,5 +56,7 @@ git config --global user.email tom.crowth@gmail.com
 git config --global credential.helper store
 git config --global core.editor nvim
 # add github credentials from another computer
+
+
 
 echo 

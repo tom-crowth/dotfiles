@@ -19,7 +19,10 @@ vim.defer_fn(function()
     -- parser_install_dir = "/some/path/to/store/parsers", -:so
     -- - Remember to run vim.opt.runtimepath:append("/some/path/to/store/parsers")!
 
-    highlight = { enable = true },
+    highlight = {
+      enable = true,
+      disable = { "latex" },
+    },
     indent = { enable = true },
     incremental_selection = {
       enable = true,
