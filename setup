@@ -33,8 +33,16 @@ echo "PATH=$PATH:~/.local/share/bob/nvim-bin/" >> ~/.bashrc
 source ~/.bashrc
 bob use stable
 
+echo "Install other programs..."
+sudo apt install ripgrep
+sudo apt install fd-find
+sudo apt install xclip
+sudo apt install conky-all
+
 echo set up nvim symlink:
 ln -s $df_dir/nvim ~/.config/nvim
+ln -s $df_dir/conky ~/.config/conky
+ln -s $df_dir/tmux/tmux.conf ~/.tmux.conf
 
 # set up python env using mamba
 curl -L -O "https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-$(uname)-$(uname -m).sh"
@@ -44,6 +52,9 @@ mamba init
 source ~/.bashrc
 mamba create dev
 echo "mamba activate dev" >> ~/.bashrc
+
+# set up haskell
+sudo apt install ghc
 
 # add aliases to ~/.bashrc
 echo "source ${df_dir}/bash_aliases" >> ~/.bashrc
@@ -57,6 +68,8 @@ git config --global credential.helper store
 git config --global core.editor nvim
 # add github credentials from another computer
 
-
+# install a new terminal: kitty
+# goto sw.kovidgoyal.net/kitty/binary if any issues
+curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin installer=nightly
 
 echo 

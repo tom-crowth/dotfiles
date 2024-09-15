@@ -14,7 +14,6 @@ return {
             },
             'BurntSushi/ripgrep',
             'sharkdp/fd',
-
         },
     },
 
@@ -32,12 +31,7 @@ return {
     "tpope/vim-rhubarb",
     "tpope/vim-sleuth",
     'tpope/vim-surround',
-
-    {
-        'folke/which-key.nvim',
-        dependencies = { "echasnovski/mini.nvim" },
-        opts = {}
-    },
+    'tpope/vim-unimpaired',
 
     {
         'navarasu/onedark.nvim',
@@ -69,6 +63,6 @@ return {
 
     { 'numToStr/Comment.nvim', opts = {} },
 
-    require 'plugins.kickstart.debug',
-    require 'plugins.kickstart.autoformat',
+    require 'other_setup.debug',
+    require 'other_setup.autoformat',
 }

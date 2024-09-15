@@ -48,18 +48,18 @@ return {
 			[=[
 				s(
 					{
-						trig = "<>",
-						dscr = "<>",
+						trig = "<1>",
+						dscr = "<2>",
 					},
 					fmt(
 						[[
-							<>
+							<4>
 						]],
 						{
-							i(1, "<>"),
+							i(1, "<3>"),
 						},
 						{
-							delimiters = "<>",
+							delimiters = "<<>>",
 						}
 					)
 				),
@@ -68,9 +68,9 @@ return {
 			{
 				i(1, "trigger"),
 				i(2, "description"),
-				i(3, "snippet formatted text"),
-				i(4, "arg text"),
-				i(5, "<>"),
+				i(3, "arg text"),
+				i(4, "snippet formatted text"),
+				-- i(5, "<>"),
 			},
 			{
 				delimiters = "<>",
@@ -81,12 +81,13 @@ return {
 	-- to add more snip arguments after csnip
 	s(
 		{
-			trig = "snarg",
+			trig = "snar",
 			dscr = "An argument for a snippet",
 		},
 		fmt(
 			[[
 				i(<>, "<>"),
+				
 			]],
 			{
 				i(1, "num"),

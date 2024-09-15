@@ -1,5 +1,4 @@
 local lsp_zero = require('lsp-zero')
-
 local cmp = require('cmp')
 -- luasnip.config.setup {}
 
@@ -45,6 +44,7 @@ cmp.setup {
     sources = {
         { name = 'nvim_lsp' },
         { name = 'luasnip' },
+        { name = 'path' },
     },
 }
 
@@ -55,18 +55,18 @@ cmp.setup.cmdline({ '/', '?' }, {
     }
 })
 
-cmp.setup.cmdline({ ':' }, {
-    mapping = cmp.mapping.preset.cmdline(),
-    sources = {
-        cmp.config.sources({
-            { name = 'path' }
-        }, {
-            { name = 'cmdline' }
-        }),
-        matching = { disallow_symbol_nonprefix_matching = false }
-    }
-})
-
+-- cmp.setup.cmdline({ ':' }, {
+--     mapping = cmp.mapping.preset.cmdline(),
+--     sources = {
+--         cmp.config.sources({
+--             { name = 'path' }
+--         }, {
+--             { name = 'cmdline' }
+--         }),
+--         matching = { disallow_symbol_nonprefix_matching = false }
+--     }
+-- })
+--
 local lsp_attach = function(client, bufnr)
     local builtin = require('telescope.builtin')
     local nmap = function(keys, func, desc)
@@ -153,12 +153,48 @@ end
 local lua_handler = function()
     local lspconfig = require('lspconfig')
     lspconfig.lua_ls.setup {
+        capabilities = capabilities,
         settings = {
             Lua = {
                 diagnostics = {
                     globals = { "vim" },
                 },
             },
+        },
+    }
+end
+
+local gopls_handler = function()
+    local lspconfig = require('lspconfig')
+    lspconfig.gopls.setup {
+        capabilities = capabilities,
+        settings = {
+            gopls = {
+                analyses = {
+                    unusedparams = true,
+                },
+                staticcheck = true,
+                gofumpt = true,
+            },
+        },
+    }
+end
+
+local marksman_handler = function()
+    local lspconfig = require('lspconfig')
+    lspconfig.marksman.setup {
+        capabilities = capabilities,
+        settings = {
+        },
+    }
+end
+
+
+local odin_handler = function()
+    local lspconfig = require('lspconfig')
+    lspconfig.ols.setup {
+        capabilities = capabilities,
+        settings = {
         },
     }
 end
@@ -175,36 +211,14 @@ local handlers = {
     end,
     ['lua_ls'] = lua_handler,
     ['pyright'] = pyright_handler,
+    -- ['gopls'] = gopls_handler,
+    -- ['marksman'] = marksman_handler,
+    -- ['ols'] = odin_handler,
 }
 mason_lspconfig.setup_handlers(handlers)
 
 
 require('lazydev').setup()
-
--- the rest here needs looking at or moving
-require('which-key').register {
-    { "<leader>c",  group = "[C]ode" },
-    { "<leader>c_", hidden = true },
-    { "<leader>d",  group = "[D]ocument" },
-    { "<leader>d_", hidden = true },
-    { "<leader>g",  group = "[G]it" },
-    { "<leader>g_", hidden = true },
-    { "<leader>h",  group = "Git [H]unk" },
-    { "<leader>h_", hidden = true },
-    { "<leader>r",  group = "[R]ename" },
-    { "<leader>r_", hidden = true },
-    { "<leader>s",  group = "[S]earch" },
-    { "<leader>s_", hidden = true },
-    { "<leader>t",  group = "[T]oggle" },
-    { "<leader>t_", hidden = true },
-    { "<leader>w",  group = "[W]orkspace" },
-    { "<leader>w_", hidden = true },
-}
-
-require('which-key').register({
-    { "<leader>",  group = "VISUAL <leader>", mode = "v" },
-    { "<leader>h", group = "Git [H]unk",      mode = "v" },
-}, { mode = 'v' })
 
 
 -- Configure lua lsp
