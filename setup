@@ -72,4 +72,5 @@ git config --global core.editor nvim
 # goto sw.kovidgoyal.net/kitty/binary if any issues
 curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin installer=nightly
 
-echo 
+# update texlive if needed
+# ref: https://tug.org/texlive/quickinstall.html and follow instructions

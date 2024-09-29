@@ -40,12 +40,12 @@ return {
             map('v', '<leader>hs', function()
                 gs.stage_hunk { vim.fn.line '.', vim.fn.line 'v' }
             end, { desc = 'stage git hunk' })
-            map('v', '<leader>hr', function()
+            map('v', '<leader>ghr', function()
                 gs.reset_hunk { vim.fn.line '.', vim.fn.line 'v' }
             end, { desc = 'reset git hunk' })
 
             map('n', '<leader>hs', gs.stage_hunk, { desc = 'git stage hunk' })
-            map('n', '<leader>hr', gs.reset_hunk, { desc = 'git reset hunk' })
+            map('n', '<leader>ghr', gs.reset_hunk, { desc = 'git reset hunk' })
             map('n', '<leader>hS', gs.stage_buffer, { desc = 'git stage buffer' })
             map('n', '<leader>hu', gs.undo_stage_hunk, { desc = 'undo git stage hunk' })
             map('n', '<leader>hR', gs.reset_buffer, { desc = 'git reset buffer' })
