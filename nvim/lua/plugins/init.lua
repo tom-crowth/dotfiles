@@ -1,7 +1,7 @@
 return {
     {
         "nvim-telescope/telescope.nvim",
-        branch = '0.1.x',
+        -- branch = '0.1.x',
         dependencies = {
 
             "nvim-lua/plenary.nvim",
@@ -25,7 +25,6 @@ return {
         end
     },
 
-    "nvim-treesitter/playground",
     "mbbill/undotree",
     "tpope/vim-fugitive",
     "tpope/vim-rhubarb",
@@ -57,7 +56,7 @@ return {
     {
         'lukas-reineke/indent-blankline.nvim',
         main = 'ibl',
-        commit = "29be0919b91fb59eca9e90690d76014233392bef",
+        -- commit = "29be0919b91fb59eca9e90690d76014233392bef",
         opts = {},
     },
 

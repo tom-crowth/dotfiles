@@ -116,6 +116,7 @@ local mason_lspconfig = require('mason-lspconfig')
 local servers = {
     pyright = {},
     rust_analyzer = {},
+    ts_ls = {},
     lua_ls = {
         Lua = {
             workspace = { checkThirdParty = false },
@@ -135,9 +136,21 @@ capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
 
 -- define handlers for specific lsps
-local pyright_handler = function()
+vim.lsp.config("pyright", {
+    capabilities = capabilities,
+    on_attach = function()
+        vim.keymap.set("n", "K", vim.lsp.buf.hover, { buffer = 0 })
+        vim.keymap.set("n", "<leader>dl", "<cmd>Telescope diagnostics<CR>", { buffer = 0 })
+        vim.keymap.set("n", "<leader>r", vim.lsp.buf.rename, { buffer = 0 })
+        vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { buffer = 0 })
+        vim.keymap.set("n", "<leader>gd", vim.lsp.buf.definition, { buffer = 0 })
+        vim.keymap.set("n", "<leader>gr", vim.lsp.buf.references, { buffer = 0 })
+    end,
+})
+
+local tsls_handler = function()
     local lspconfig = require('lspconfig')
-    lspconfig.pyright.setup {
+    lspconfig.ts_ls.setup {
         capabilities = capabilities,
         on_attach = function()
             vim.keymap.set("n", "K", vim.lsp.buf.hover, { buffer = 0 })
@@ -164,6 +177,11 @@ local lua_handler = function()
     }
 end
 
+vim.lsp.config("clangd", {
+    -- cmd = { "clangd", "--query-driver=/usr/bin/g++,/usr/bin/clang++,/usr/bin/c++" },
+    cmd = { "clangd", "--query-driver=/usr/bin/c++" },
+})
+
 local gopls_handler = function()
     local lspconfig = require('lspconfig')
     lspconfig.gopls.setup {
@@ -180,16 +198,6 @@ local gopls_handler = function()
     }
 end
 
-local marksman_handler = function()
-    local lspconfig = require('lspconfig')
-    lspconfig.marksman.setup {
-        capabilities = capabilities,
-        settings = {
-        },
-    }
-end
-
-
 local odin_handler = function()
     local lspconfig = require('lspconfig')
     lspconfig.ols.setup {
@@ -200,22 +208,24 @@ local odin_handler = function()
 end
 
 -- use the specific handlers and a generic
-local handlers = {
-    function(server_name)
-        require('lspconfig')[server_name].setup {
-            capabilities = capabilities,
-            on_attach = lsp_attach,
-            settings = servers[server_name],
-            filetypes = (servers[server_name] or {}).filetypes,
-        }
-    end,
-    ['lua_ls'] = lua_handler,
-    ['pyright'] = pyright_handler,
-    -- ['gopls'] = gopls_handler,
-    -- ['marksman'] = marksman_handler,
-    -- ['ols'] = odin_handler,
-}
-mason_lspconfig.setup_handlers(handlers)
+-- local handlers = {
+--     function(server_name)
+--         require('lspconfig')[server_name].setup {
+--             capabilities = capabilities,
+--             on_attach = lsp_attach,
+--             settings = servers[server_name],
+--             filetypes = (servers[server_name] or {}).filetypes,
+--         }
+--     end,
+--     ['lua_ls'] = lua_handler,
+--     ['pyright'] = pyright_handler,
+--     ['ts_ls'] = tsls_handler,
+--     ['clangd'] = clangd_handler,
+--     ['gopls'] = gopls_handler,
+--     -- ['marksman'] = marksman_handler,
+--     ['ols'] = odin_handler,
+-- }
+-- mason_lspconfig.setup_handlers(handlers)
 
 
 require('lazydev').setup()

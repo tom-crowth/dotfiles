@@ -50,7 +50,7 @@ bash Miniforge3-$(uname)-$(uname -m).sh
 rm Miniforge3-$(uname)-$(uname -m).sh
 mamba init
 source ~/.bashrc
-mamba create dev
+mamba create -n dev
 echo "mamba activate dev" >> ~/.bashrc
 
 # set up haskell
